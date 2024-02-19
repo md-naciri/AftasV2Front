@@ -6,6 +6,7 @@ import { LevelComponent } from './modules/level/components/level/level.component
 import { FishComponent } from './modules/fishs/components/fish/fish.component';
 import { MemberComponent } from './modules/members/components/member/member.component';
 import { HuntingComponent } from './modules/hunting/components/hunting/hunting.component';
+import { NotauthorizeComponent } from './errors/components/notauthorize/notauthorize.component';
 
 const routes: Routes = [
   {path: 'huntings', component: HuntingComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'fishes', component: FishComponent},
   {path: 'competitions' , component: CompetitionsComponent},
   {path: 'levels' ,'component': LevelComponent},
+  {path:'403',component:NotauthorizeComponent},
   {path: '', redirectTo: '/competitions', pathMatch: 'full'},
   {path: '**', component: NotfoundComponent, pathMatch: 'full'}
 ];
