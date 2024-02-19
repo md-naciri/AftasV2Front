@@ -7,13 +7,15 @@ import { FishComponent } from './modules/fishs/components/fish/fish.component';
 import { MemberComponent } from './modules/members/components/member/member.component';
 import { HuntingComponent } from './modules/hunting/components/hunting/hunting.component';
 import { NotauthorizeComponent } from './errors/components/notauthorize/notauthorize.component';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
-  {path: 'huntings', component: HuntingComponent},
-  {path: 'members', component: MemberComponent},
-  {path: 'fishes', component: FishComponent},
-  {path: 'competitions' , component: CompetitionsComponent},
-  {path: 'levels' ,'component': LevelComponent},
+  {path: 'huntings', component: HuntingComponent,canActivate: [AuthGuard]},
+  {path: 'members', component: MemberComponent,canActivate: [AuthGuard]},
+  {path: 'fishes', component: FishComponent,canActivate: [AuthGuard]},
+  {path: 'competitions' , component: CompetitionsComponent,canActivate: [AuthGuard]},
+  {path: 'levels' , component: LevelComponent,canActivate: [AuthGuard]},
+  {path: 'competitions' , component: CompetitionsComponent,canActivate: [AuthGuard]},
   {path:'403',component:NotauthorizeComponent},
   {path: '', redirectTo: '/competitions', pathMatch: 'full'},
   {path: '**', component: NotfoundComponent, pathMatch: 'full'}
