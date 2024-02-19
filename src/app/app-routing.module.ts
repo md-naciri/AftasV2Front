@@ -8,6 +8,7 @@ import { MemberComponent } from './modules/members/components/member/member.comp
 import { HuntingComponent } from './modules/hunting/components/hunting/hunting.component';
 import { NotauthorizeComponent } from './errors/components/notauthorize/notauthorize.component';
 import { AuthGuard } from './auth/guards/auth.guard';
+import { LoginComponent } from './auth/components/login/login.component';
 
 const routes: Routes = [
   {path: 'huntings', component: HuntingComponent,canActivate: [AuthGuard]},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'fishes', component: FishComponent,canActivate: [AuthGuard]},
   {path: 'competitions' , component: CompetitionsComponent,canActivate: [AuthGuard]},
   {path: 'levels' , component: LevelComponent,canActivate: [AuthGuard]},
+  {path:'login',component:LoginComponent},
   {path: 'competitions' , component: CompetitionsComponent,canActivate: [AuthGuard]},
   {path:'403',component:NotauthorizeComponent},
   {path: '', redirectTo: '/competitions', pathMatch: 'full'},
