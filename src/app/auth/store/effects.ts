@@ -1,16 +1,16 @@
 import { inject } from "@angular/core";
 import { AuthService } from "../auth.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { PersistanceService } from "../shared/service/persistance.service";
 import { catchError, map, of, switchMap, tap } from "rxjs";
 import { authActions, loginActions, verifyEmailActions } from "./action";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { CurrentUserInterface } from "../shared/types/currentUser.interface";
 import { ResponseWithDetailsInterface } from "../shared/types/responseWithDetails.interface";
-import { MessageService } from "../shared/service/message.service";
-import { UserService } from "../user.service";
+import { PersistanceService } from "../shared/services/persistance.service";
+import { MessageService } from "../shared/services/message.service";
 import { RoleService } from "../role.service";
+import { UserService } from "../user.service";
 
 export const registerEffect = createEffect(
     (actions$ = inject(Actions),

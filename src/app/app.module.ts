@@ -10,7 +10,7 @@ import { FishComponent } from './modules/fishs/components/fish/fish.component';
 import { MemberComponent } from './modules/members/components/member/member.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { LimitToPipe } from './pipe/limit-to.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCompetitionComponent } from './modules/competition/components/add-competition/add-competition.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddMemberComponent } from './modules/members/components/add-member/add-member.component';
@@ -26,6 +26,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { authFeatureKey, authReducer } from './auth/store/reducer';
 import { redirectAfterEmailEffect,mailVerificationEffect,registerEffect, redirectAfterRegisterEffect, loginEffect, redirectAfterLoginEffect } from './auth/store/effects';
 import { EffectsModule } from '@ngrx/effects';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -49,12 +50,14 @@ import { EffectsModule } from '@ngrx/effects';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatPaginatorModule,
     FormsModule,
     BrowserAnimationsModule,
     NgSelectModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     StoreModule.forRoot({}),
     StoreModule.forFeature(authFeatureKey, authReducer),
     StoreDevtoolsModule.instrument({ 
