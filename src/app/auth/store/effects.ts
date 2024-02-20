@@ -25,7 +25,7 @@ export const registerEffect = createEffect(
                         return authActions.registerSuccess({ response: response }); 
                     }),
                     catchError((errorResponse: HttpErrorResponse) => {
-                        console.log('errorResponse',errorResponse.error.details);
+                        console.log('errorResponse',errorResponse);
                         return of(authActions.registerFailure({ errors: errorResponse.error.details }));
                     })
                 );
