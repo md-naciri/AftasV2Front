@@ -108,14 +108,7 @@
         grid-template-columns: repeat(2, 50%);
     }
 
-    li {
-        list-style-type: none;
-
-        display: flex;
-        flex-direction: column;
-        padding: 0px 5px;
-        text-align: left;
-
+    
         label {
             font-size: 0.8rem;
             font-weight: 600;
@@ -135,7 +128,6 @@
             color: var(--main-color);
             margin-bottom: 10px;
         }
-    }
 
     .Phone {
         display: grid;
