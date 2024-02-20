@@ -3,10 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddCompetitionComponent } from '../add-competition/add-competition.component';
 import { CompetitionService } from '../../services/competition.service';
 import { PageEvent } from '@angular/material/paginator';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { RankingComponent } from '../../../ranking/components/ranking/ranking.component';
-import { response } from 'express';
-import { error } from 'console';
+
 
 @Component({
   selector: 'app-competitions',

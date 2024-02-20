@@ -12,14 +12,7 @@ export class CompetitionService {
   constructor(private httpClient:HttpClient,private router:Router) { }
 
   getAllCompetitions() : Observable<any>{
-    return this.httpClient.get(environment.apiURL +'competitions').pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 403) {
-          this.router.navigate(['/competitions']);
-        }
-        return throwError(error);
-      })
-    );
+    return this.httpClient.get(environment.apiURL +'competitions');
   }
   addCompetition(competition:any){
     return this.httpClient.post(environment.apiURL +'competition',competition);
