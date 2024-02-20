@@ -10,6 +10,7 @@ import { NotauthorizeComponent } from './errors/components/notauthorize/notautho
 import { AuthGuard } from './auth/guards/auth.guard';
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
+import { MailComponent } from './auth/components/mail/mail.component';
 
 const routes: Routes = [
   {path: 'huntings', component: HuntingComponent,canActivate: [AuthGuard]},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'competitions' , component: CompetitionsComponent,canActivate: [AuthGuard]},
   {path: 'levels' , component: LevelComponent,canActivate: [AuthGuard]},
   {path: 'login',component:LoginComponent},
-  {path: 'register',component:RegisterComponent},  
+  {path: 'register',component:RegisterComponent},
+  {path:'verify-email',component:MailComponent},  
   {path: '403',component:NotauthorizeComponent,canActivate: [AuthGuard]},
   {path: '', redirectTo: '/competitions', pathMatch: 'full'},
   {path: '**', component: NotfoundComponent, pathMatch: 'full'}
