@@ -9,6 +9,7 @@ import { HuntingComponent } from './modules/hunting/components/hunting/hunting.c
 import { NotauthorizeComponent } from './errors/components/notauthorize/notauthorize.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { LoginComponent } from './auth/components/login/login.component';
+import { RegisterComponent } from './auth/components/register/register.component';
 
 const routes: Routes = [
   {path: 'huntings', component: HuntingComponent,canActivate: [AuthGuard]},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'competitions' , component: CompetitionsComponent,canActivate: [AuthGuard]},
   {path: 'levels' , component: LevelComponent,canActivate: [AuthGuard]},
   {path: 'login',component:LoginComponent},
+  {path:  'register',component:RegisterComponent},  
   {path: 'competitions' , component: CompetitionsComponent,canActivate: [AuthGuard]},
   {path:'403',component:NotauthorizeComponent},
   {path: '', redirectTo: '/competitions', pathMatch: 'full'},
