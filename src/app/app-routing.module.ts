@@ -12,14 +12,13 @@ import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 
 const routes: Routes = [
-  {path: 'huntings', component: HuntingComponent,canActivate: [AuthGuard]},
-  {path: 'members', component: MemberComponent,canActivate: [AuthGuard]},
-  {path: 'fishes', component: FishComponent,canActivate: [AuthGuard]},
-  {path: 'competitions' , component: CompetitionsComponent,canActivate: [AuthGuard]},
-  {path: 'levels' , component: LevelComponent,canActivate: [AuthGuard]},
+  {path: 'huntings', component: HuntingComponent},
+  {path: 'members', component: MemberComponent},
+  {path: 'fishes', component: FishComponent},
+  {path: 'competitions' , component: CompetitionsComponent},
+  {path: 'levels' , component: LevelComponent},
   {path: 'login',component:LoginComponent},
-  {path:  'register',component:RegisterComponent},  
-  {path: 'competitions' , component: CompetitionsComponent,canActivate: [AuthGuard]},
+  {path: 'register',component:RegisterComponent},  
   {path:'403',component:NotauthorizeComponent},
   {path: '', redirectTo: '/competitions', pathMatch: 'full'},
   {path: '**', component: NotfoundComponent, pathMatch: 'full'}

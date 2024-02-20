@@ -14,18 +14,18 @@
     background-color: #ffffffa1;
     backdrop-filter: blur(10px);
     border: 2px solid #ffffff6d;
-    width: 760px;
+    width: 900px;
     border-radius: 10px;
     box-shadow: 3px 3px 11px 1.5px #0000002b;
     font-family: Poppins;
     padding: 10px;
-    height: 550px;
+    height: 40em;
     display: grid;
     grid-template-columns: 50% 50%;
 }
 
 h1 {
-    padding: 20px;
+    padding: 0px;
     color: var(--main-color);
     font-size: 2.1rem;
     font-weight: 800;
@@ -44,10 +44,11 @@ h1 {
 form {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 2px 10px 10px 10px;
 }
 
 .Name,
+.card-type,
 .password {
     display: grid;
     grid-template-columns: repeat(2, 50%);
@@ -197,6 +198,7 @@ form button {
     }
 
     .Name,
+    .card-type
     .Phone,
     .password {
         display: block;

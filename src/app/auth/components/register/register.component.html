@@ -1,18 +1,26 @@
 <ng-container *ngIf="data$ | async as data">
     <div id="register">
-        <div *ngIf="showBackendError && data.backendErrors" id="alert-2" class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-            <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        <div *ngIf="showBackendError && data.backendErrors" id="alert-2"
+            class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+            role="alert">
+            <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                viewBox="0 0 20 20">
+                <path
+                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
             </svg>
             <span class="sr-only">Info</span>
             <div class="ms-3 text-sm font-medium">
-                <strong>Error</strong>       {{ getFirstError(data.backendErrors) }}
+                <span>Error</span> {{ getFirstError(data.backendErrors) }}
             </div>
-            <button (click)="showBackendError = false" type="button" class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-2" aria-label="Close">
-              <span class="sr-only">Close</span>
-              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-              </svg>
+            <button (click)="showBackendError = false" type="button"
+                class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
+                data-dismiss-target="#alert-2" aria-label="Close">
+                <span class="sr-only">Close</span>
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
             </button>
         </div>
         <div id="FormContainer">
@@ -23,39 +31,64 @@
                 <div class="Name">
                     <li><label>First Name:</label>
                         <input type="text" formControlName="firstName" placeholder="John">
-                        <strong class="text-red-600" *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched">
+                        <span class="text-red-600"
+                            *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched">
                             first name is required.
-                        </strong>
+                        </span>
                     </li>
                     <li><label>Last Name:</label>
                         <input type="text" formControlName="lastName" placeholder="Doe">
-                        <strong class="text-red-600" *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched">
+                        <span class="text-red-600"
+                            *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched">
                             last name is required.
-                        </strong>
+                        </span>
                     </li>
-                    
                 </div>
+                <div class="card-type">
+                    <li><label>IdentityDocumentType:</label>
+                        <select formControlName="identityDocumentType">
+                            <option value="PASSPORT">Passport</option>
+                            <option value="IDENTITY_CARD">Identity Card</option>
+                            <option value="DRIVING_LICENSE">Driving License</option>
+                        </select>
+                    </li>
+                    <li><label>Nationality:</label>
+                        <select formControlName="nationality">
+                            <option *ngFor="let nationality of nationalities" [value]="nationality.code">
+                                {{nationality.name}}</option>
+                        </select>
+                    </li>
+                </div>
+                <li><label>IdentityNumber:</label>
+                    <input type="text" formControlName="identityNumber">
+                    <span class="text-red-600"
+                        *ngIf="form.get('identityNumber')?.invalid && form.get('identityNumber')?.touched">
+                        identity number is required.
+                    </span>
+                </li>
                 <li>
                     <label>Email:</label>
                     <input type="email" formControlName="email" placeholder="example@gmail.com" autocomplete="username">
-                    <strong class="text-red-600" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+                    <span class="text-red-600" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
                         please use a valid mail.
-                    </strong>
+                    </span>
                 </li>
                 <li>
                     <label>Password:</label>
-                    <input formControlName="password" type="password" placeholder="********" autocomplete="new-password">
-                    <strong class="text-red-600" *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+                    <input formControlName="password" type="password" placeholder="********"
+                        autocomplete="new-password">
+                    <span class="text-red-600" *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
                         Password must contains at least 8 charcters.
-                    </strong>
+                    </span>
                 </li>
                 <button type="submit" [disabled]="data.isSubmiting">Sign Up</button>
-    
-                <p class="ms-1">already have an account <a routerLink="/login" class="ms-2 text-blue-800 font-bold ">Sign
+
+                <p class="ms-1">already have an account <a routerLink="/login"
+                        class="ms-2 text-blue-800 font-bold ">Sign
                         In</a></p>
-    
+
             </form>
-    
+
         </div>
     </div>
-    </ng-container>
+</ng-container>
