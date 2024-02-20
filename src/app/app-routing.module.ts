@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'levels' , component: LevelComponent,canActivate: [AuthGuard]},
   {path: 'login',component:LoginComponent},
   {path: 'register',component:RegisterComponent},
-  {path:'verify-email',component:MailComponent},  
+  {path: 'verify-mail',component:MailComponent},  
   {path: '403',component:NotauthorizeComponent,canActivate: [AuthGuard]},
   {path: '', redirectTo: '/competitions', pathMatch: 'full'},
   {path: '**', component: NotfoundComponent, pathMatch: 'full'}
