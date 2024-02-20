@@ -12,22 +12,24 @@ export class SidebarComponent {
   numberOfLevels: number = 0;
   private roles: { role: string, permissions: string[] }[] = [];
 
-  constructor(private sharedService:SharedService,private persistanceService: PersistanceService) { }
-  
-  ngOnInit(){
+  constructor(private sharedService: SharedService, private persistanceService: PersistanceService) { }
+
+  ngOnInit() {
     this.getAllLevels();
     console.log('RoleService');
-    const myToken =  this.persistanceService.get('accessToken');
-    
-    const decodedToken = JSON.parse(atob(myToken!.split('.')[1]));
-                        console.log(decodedToken.roles)
-    this.setRoles(decodedToken.roles);
+    const myToken = this.persistanceService.get('accessToken');
+    if (myToken) {
+      const decodedToken = JSON.parse(atob(myToken!.split('.')[1]));
+      console.log(decodedToken.roles)
+      this.setRoles(decodedToken.roles);
+    }
+
   }
-  
-  getAllLevels(){
+
+  getAllLevels() {
     this.sharedService.getAllLevels().subscribe(
-      (response:any) => {
-       this.numberOfLevels = response.details.levels.length;
+      (response: any) => {
+        this.numberOfLevels = response.details.levels.length;
       },
       (error) => {
         console.error(error.message);
