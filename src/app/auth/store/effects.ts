@@ -122,7 +122,7 @@ export const redirectAfterEmailEffect = createEffect(
            ofType(verifyEmailActions.mailSuccess),
            tap(() => {
                console.log('token',persistanceService.get('accessToken'));
-               router.navigateByUrl('/competition');
+               router.navigateByUrl('/competitions');
            })
        )
     },
