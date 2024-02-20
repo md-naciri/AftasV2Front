@@ -18,7 +18,7 @@ export class AppComponent {
       delay(1000)
     ).subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.showContent = !['/login', '/register','/verify-mail'].includes(event.urlAfterRedirects);
+        this.showContent = !['/login', '/register','/verify-email'].includes(event.urlAfterRedirects);
         this.isLoading = false;
 
       }
