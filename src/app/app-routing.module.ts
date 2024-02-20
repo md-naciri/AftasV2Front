@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'fishes', component: FishComponent,canActivate: [AuthGuard]},
   {path: 'competitions' , component: CompetitionsComponent,canActivate: [AuthGuard]},
   {path: 'levels' , component: LevelComponent,canActivate: [AuthGuard]},
-  {path:'login',component:LoginComponent},
+  {path: 'login',component:LoginComponent},
   {path: 'competitions' , component: CompetitionsComponent,canActivate: [AuthGuard]},
   {path:'403',component:NotauthorizeComponent},
   {path: '', redirectTo: '/competitions', pathMatch: 'full'},
