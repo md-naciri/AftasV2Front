@@ -84,7 +84,7 @@ export const redirectAfterLoginEffect = createEffect(
             tap(() => {
                 console.log('redirectAfterLoginEffect');
                 console.log('token',persistanceService.get('accessToken'));
-                router.navigateByUrl('/competition');
+                router.navigateByUrl('/competitions');
             })
         )
      },
