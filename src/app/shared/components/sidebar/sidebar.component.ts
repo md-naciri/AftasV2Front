@@ -10,20 +10,11 @@ import { PersistanceService } from '../../../auth/shared/services/persistance.se
 export class SidebarComponent {
 
   numberOfLevels: number = 0;
-  private roles: { role: string, permissions: string[] }[] = [];
 
-  constructor(private sharedService: SharedService, private persistanceService: PersistanceService) { }
+  constructor(private sharedService: SharedService) { }
 
   ngOnInit() {
-    this.getAllLevels();
-    console.log('RoleService');
-    const myToken = this.persistanceService.get('accessToken');
-    if (myToken) {
-      const decodedToken = JSON.parse(atob(myToken!.split('.')[1]));
-      console.log(decodedToken.roles)
-      this.setRoles(decodedToken.roles);
-    }
-
+    this.getAllLevels();    
   }
 
   getAllLevels() {
@@ -37,19 +28,13 @@ export class SidebarComponent {
     );
   }
 
-  setRoles(roles: { role: string, permissions: string[] }[]): void {
-    this.roles = roles;
-  }
-
-  getRoles(): { role: string, permissions: string[] }[] {
-    return this.roles;
-  }
+  
 
   hasRole(role: string): boolean {
-    return this.roles.some(r => r.role === role);
+    return this.sharedService.getRoles().some(r => r.role === role);
   }
 
   hasPermission(permission: string): boolean {
-    return this.roles.some(r => r.permissions.includes(permission));
+    return this.sharedService.getRoles().some(r => r.permissions.includes(permission));
   }
 }

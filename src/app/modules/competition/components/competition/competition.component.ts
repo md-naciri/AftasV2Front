@@ -4,6 +4,7 @@ import { AddCompetitionComponent } from '../add-competition/add-competition.comp
 import { CompetitionService } from '../../services/competition.service';
 import { PageEvent } from '@angular/material/paginator';
 import { RankingComponent } from '../../../ranking/components/ranking/ranking.component';
+import { SharedService } from '../../../../shared/services/shared.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class CompetitionsComponent {
   constructor(
     private competitionService: CompetitionService,
     private addCompetitionModal: MatDialog,
-    private rankingModal : MatDialog
+    private rankingModal : MatDialog,
+    private sharedService: SharedService
     ) { }
 
  
@@ -31,6 +33,11 @@ export class CompetitionsComponent {
     this.isLoading = true;
     this.getAllCompetitions();
   }
+
+  hasPermission(permission: string): boolean {
+    return this.sharedService.getRoles().some(r => r.permissions.includes(permission));
+  }
+
   getAllCompetitions(){
     this.competitionService.getAllCompetitions().subscribe(
       (response: any) => {
