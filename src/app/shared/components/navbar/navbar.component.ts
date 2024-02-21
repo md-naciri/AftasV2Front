@@ -22,8 +22,7 @@ export class NavbarComponent {
     this.authService.logout().subscribe(() => {
       localStorage.removeItem('accessToken');
       this.router.navigate(['/login']);
-      this.toastr.success('Logout successful');
-
+      this.toastr.success('Logout successful','', { timeOut: 3000 });
     }, (error) => {
       console.error('Error during logout:', error);
     });

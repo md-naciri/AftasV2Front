@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log('Outgoing HTTP request', request.url);
 
-    if (request.url.endsWith('/login') || request.url.endsWith('/validate-token') || request.url.endsWith('/signup')  || request.url.endsWith('/verify-email') ){
+    if (request.url.endsWith('/login') || request.url.endsWith('/validate-token') || request.url.endsWith('/signup')  || request.url.endsWith('/verify-email') || request.url.endsWith('/verify-email') ){
       console.log('auth request');
       return next.handle(request);
     }
