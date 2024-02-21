@@ -1,8 +1,10 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { PersistanceService } from '../shared/services/persistance.service';
 import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -11,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log('Outgoing HTTP request', request.url);
 
-    if (request.url.endsWith('/login') || request.url.endsWith('/signup') || request.url.endsWith('/validate-token') || request.url.endsWith('/verify-email') ){
+    if (request.url.endsWith('/login') || request.url.endsWith('/validate-token') || request.url.endsWith('/signup')  || request.url.endsWith('/verify-email') ){
       console.log('auth request');
       return next.handle(request);
     }
@@ -33,10 +35,17 @@ export class AuthInterceptor implements HttpInterceptor {
           (error) => {
             console.error('HTTP Error:', error);
           }
-        )
+        ),
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 403) {
+            this.router.navigate(['/403']);
+          }
+          return throwError(error);
+        })
       );
     } else {
       console.error('Access token not found');
+      this.router.navigate(['/login']);
       return next.handle(request);
     }
   }
