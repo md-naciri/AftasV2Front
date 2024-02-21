@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'verify-email',component:MailComponent},  
   {path: '403',component:NotauthorizeComponent,canActivate: [AuthGuard]},
   {path: '', redirectTo: '/competitions', pathMatch: 'full'},
-  {path: '**', component: NotfoundComponent, pathMatch: 'full'}
+  {path: '**', component: NotfoundComponent, pathMatch: 'full',canActivate: [AuthGuard]}
 ];
 
 @NgModule({
