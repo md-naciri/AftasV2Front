@@ -5,6 +5,7 @@ import { MemberService } from '../../services/member.service';
 import { PageEvent } from '@angular/material/paginator';
 import { CompetitionService } from '../../../competition/services/competition.service';
 import { AssignCompetitionComponent } from '../assign-competition/assign-competition.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-member',
@@ -139,5 +140,19 @@ export class MemberComponent {
   getNationalityName(code: string): string {
     const nationality = this.nationalities.find(n => n.code === code);
     return nationality ? nationality.name : code;
+  }
+  enableUser() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to enable this user.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, enable it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log('User enabled');
+      }
+    })
   }
 }
