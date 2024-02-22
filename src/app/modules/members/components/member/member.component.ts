@@ -6,6 +6,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { CompetitionService } from '../../../competition/services/competition.service';
 import { AssignCompetitionComponent } from '../assign-competition/assign-competition.component';
 import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-member',
@@ -73,7 +74,8 @@ export class MemberComponent {
   constructor(
     private dialog:MatDialog,
     private memberService:MemberService,
-    private competitionService: CompetitionService
+    private competitionService: CompetitionService,
+    private toastr: ToastrService
     ) { }
 
   
@@ -141,7 +143,7 @@ export class MemberComponent {
     const nationality = this.nationalities.find(n => n.code === code);
     return nationality ? nationality.name : code;
   }
-  enableUser() {
+  enableUser(email:string) {
     Swal.fire({
       title: 'Are you sure?',
       text: 'You are about to enable this user.',
@@ -152,6 +154,16 @@ export class MemberComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         console.log('User enabled');
+        this.memberService.enableUser(email).subscribe(
+          (response:any) => {
+            this.members = [];
+            this.getAllMembers();
+            this.toastr.success('account has been enabled successfully','', { timeOut: 2000 });
+          },
+          (error: any) => {
+            this.toastr.error(error,'', { timeOut: 2000 });
+          }
+        );
       }
     })
   }
