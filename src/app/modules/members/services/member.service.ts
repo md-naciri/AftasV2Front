@@ -18,4 +18,7 @@ export class MemberService {
   searchMember(searchText:string){
     return this.httpClient.get(environment.apiURL+'member?searchText='+searchText);
   }
+  enableUser(email:string){
+    return this.httpClient.put(environment.apiURL+'member/enable?email='+email,{});
+  }
 }
