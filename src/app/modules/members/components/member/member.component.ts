@@ -136,4 +136,8 @@ export class MemberComponent {
       }
     );
   }
+  getNationalityName(code: string): string {
+    const nationality = this.nationalities.find(n => n.code === code);
+    return nationality ? nationality.name : code;
+  }
 }
