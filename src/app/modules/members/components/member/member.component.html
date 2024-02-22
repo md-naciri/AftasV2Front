@@ -38,9 +38,6 @@
             
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Id
-                    </th>
                     <th scope="col" class="px-6 py-3 text-center">
                         First Name
                     </th>
@@ -48,13 +45,16 @@
                         Last Name
                     </th>
                     <th scope="col" class="px-6 py-3 text-center">
+                        Email
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Enabled
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
                         Nationality
                     </th>
                     <th scope="col" class="px-6 py-3 text-center">
-                        identityDocumentType
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-center">
-                        identityNumber
+                        identity Number
                     </th>
                     <th scope="col" class="px-6 py-3 text-center">
                         Action
@@ -64,9 +64,6 @@
             <tbody>
                 @if(members.length > 0){
                 <tr *ngFor="let member of members | slice: currentPageIndex * pageSize : (currentPageIndex + 1) * pageSize;let i =index " class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                       {{i +1}}
-                    </th>
                     <td class="px-6 py-4 text-center ">
                         {{member.firstName}}
                     </td>
@@ -74,10 +71,13 @@
                         {{member.lastName}}
                     </td>
                     <td class="px-6 py-4 text-center">
-                        {{getNationalityName(member.nationality)}}
+                        {{member.email}}
                     </td>
                     <td class="px-6 py-4 text-center">
-                        {{member.identityDocumentType}}
+                        {{member.enabled ? 'Active' : 'Inactive'}}
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        {{getNationalityName(member.nationality)}}
                     </td>
                     <td class="px-6 py-4 text-center">
                         {{member.identityNumber}}
