@@ -1,125 +1,138 @@
 @if(!isLoading){
-    <div class="flex items-center justify-between mb-4">
-        <h3 class="font-bold">Members</h3>
-        <button type="button" (click)="openAddMemberModal()"
-            class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><i
-                class="fa-solid fa-plus"></i> Add Member</button>
+<div class="flex items-center justify-between mb-4">
+    <h3 class="font-bold">Members</h3>
+    <button type="button" (click)="openAddMemberModal()"
+        class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><i
+            class="fa-solid fa-plus"></i> Add Member</button>
+</div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    @if(errorMessage !== ''){
+    <div id="alert-border-2"
+        class="flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800"
+        role="alert">
+        <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+            viewBox="0 0 20 20">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+        <div class="ms-3 text-sm font-medium">
+            <span>Error </span> {{errorMessage}}
+        </div>
     </div>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        @if(errorMessage !== ''){
-            <div id="alert-border-2"
-                class="flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800"
-                role="alert">
-                <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+    }@else{
+
+
+    <form class="mb-4">
+        <label for="default-search"
+            class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                 </svg>
-                <div class="ms-3 text-sm font-medium">
-                    <span>Error </span> {{errorMessage}}
-                </div>
             </div>
-        }@else{
+            <input (keyup)="searchMember($event)" type="search" id="default-search"
+                class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Search first name,last name.." required>
+        </div>
+    </form>
 
-        
-        <form class="mb-4">   
-            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-            <div class="relative">
-                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                    </svg>
-                </div>
-                <input (keyup)="searchMember($event)" type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search first name,last name.." required>
-            </div>
-        </form>
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3 text-center">
-                        First Name
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-center">
-                        Last Name
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-center">
-                        Email
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-center">
-                        Enabled
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-center">
-                        Nationality
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-center">
-                        identity Number
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-center">
-                        Action
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @if(members.length > 0){
-                <tr *ngFor="let member of members | slice: currentPageIndex * pageSize : (currentPageIndex + 1) * pageSize;let i =index " class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="px-6 py-4 text-center ">
-                        {{member.firstName}}
-                    </td>
-                    <td class="px-6 py-4 text-center">
-                        {{member.lastName}}
-                    </td>
-                    <td class="px-6 py-4 text-center">
-                        {{member.email}}
-                    </td>
-                    <td class="px-6 py-4 text-center">
-                        {{member.enabled ? 'Active' : 'Inactive'}}
-                    </td>
-                    <td class="px-6 py-4 text-center">
-                        {{getNationalityName(member.nationality)}}
-                    </td>
-                    <td class="px-6 py-4 text-center">
-                        {{member.identityNumber}}
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center justify-center">
-                            @if(lengthOfCompetitions>0){
-                                <button (click)="openAssignComeptitionModal(member.id)" title="assign to a competition" class="p-2 rounded-md bg-green-500 mr-2  ">
-                                    <i class="fa-solid fa-plus text-white"></i>
-                                </button>
-                            }
-                            <button title="edit" class="p-2 rounded-md bg-yellow-300 mr-2  ">
-                                <i class="fa-solid fa-pen-to-square text-white"></i>
-                            </button>
-                            <button title="delete" class="p-2 rounded-md bg-red-600 mr-1 ">
-                                <i class="fa-solid fa-trash-can text-white "></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                }@else {
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td colspan="7" class="px-6 py-4 text-center">
-                        No member found
-                    </td>
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-center">
+                    First Name
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Last Name
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Email
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Enabled
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Nationality
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    identity Number
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(members.length > 0){
+            <tr *ngFor="let member of members | slice: currentPageIndex * pageSize : (currentPageIndex + 1) * pageSize;let i =index "
+                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td class="px-6 py-4 text-center ">
+                    {{member.firstName}}
+                </td>
+                <td class="px-6 py-4 text-center">
+                    {{member.lastName}}
+                </td>
+                <td class="px-6 py-4 text-center">
+                    {{member.email}}
+                </td>
+                <td class="px-6 py-4 text-center">
+                    <div class="flex justify-center items-center">
+                        <span class="mr-2">
+                            {{member.enabled ? 'Active' : 'Inactive'}}
+                        </span>
+                        @if(member.enabled){
+                            <span class="online-indicator">
+                                <span class="blink" ></span>
+                            </span>
+                        }@else {
+                            <span class="inline-block h-4 w-4 rounded-full bg-red-600"></span>
+                        }
+                    </div>
+                </td>
+                <td class="px-6 py-4 text-center">
+                    {{getNationalityName(member.nationality)}}
+                </td>
+                <td class="px-6 py-4 text-center">
+                    {{member.identityNumber}}
+                </td>
+                <td class="px-6 py-4">
+                    <div class="flex items-center justify-center">
+                        @if(lengthOfCompetitions>0){
+                        <button (click)="openAssignComeptitionModal(member.id)" title="assign to a competition"
+                            class="p-2 rounded-md bg-green-500 mr-2  ">
+                            <i class="fa-solid fa-plus text-white"></i>
+                        </button>
+                        }
+                        <button title="edit" class="p-2 rounded-md bg-yellow-300 mr-2  ">
+                            <i class="fa-solid fa-pen-to-square text-white"></i>
+                        </button>
+                        <button title="delete" class="p-2 rounded-md bg-red-600 mr-1 ">
+                            <i class="fa-solid fa-trash-can text-white "></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            }@else {
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td colspan="7" class="px-6 py-4 text-center">
+                    No member found
+                </td>
                 }
-    
-            </tbody>
-    
-        </table>
-        <mat-paginator
-        [length]="members.length"
-        [showFirstLastButtons]="true"
-        [pageSizeOptions]="[5, 10, 25, 100]"
-        [pageIndex]="currentPageIndex"
-        (page)="handlePageEvent($event)"
-    >
+
+        </tbody>
+
+    </table>
+    <mat-paginator [length]="members.length" [showFirstLastButtons]="true" [pageSizeOptions]="[5, 10, 25, 100]"
+        [pageIndex]="currentPageIndex" (page)="handlePageEvent($event)">
     </mat-paginator>
-        }
-    </div>
+    }
+</div>
 }@else {
-    <div class="flex items-center justify-center">
-        <app-spinner></app-spinner>
-    </div>
+<div class="flex items-center justify-center">
+    <app-spinner></app-spinner>
+</div>
 }
