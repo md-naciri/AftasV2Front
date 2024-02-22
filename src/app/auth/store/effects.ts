@@ -9,7 +9,6 @@ import { CurrentUserInterface } from "../shared/types/currentUser.interface";
 import { ResponseWithDetailsInterface } from "../shared/types/responseWithDetails.interface";
 import { PersistanceService } from "../shared/services/persistance.service";
 import { MessageService } from "../shared/services/message.service";
-import { RoleService } from "../role.service";
 import { UserService } from "../user.service";
 
 export const registerEffect = createEffect(
@@ -51,8 +50,7 @@ export const loginEffect = createEffect(
     (actions$ = inject(Actions),
      authService = inject(AuthService),
      persistanceService = inject(PersistanceService),
-     userService = inject(UserService),
-     roleService = inject(RoleService)
+     userService = inject(UserService)
     ) => {
         return actions$.pipe(
             ofType(loginActions.login),

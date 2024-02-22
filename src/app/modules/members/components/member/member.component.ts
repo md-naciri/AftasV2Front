@@ -128,13 +128,16 @@ export class MemberComponent {
   }
 
   searchMember(e:any){
+    console.log(e.target.value);
     this.memberService.searchMember(e.target.value).subscribe(
       
       (response:any) => {
+        console.table(response.details.members);
         this.members = [];
         this.members.push(...response.details.members);
       },
       (error) => {
+        console.log(error);
         this.errorMessage = error.message;
       }
     );
